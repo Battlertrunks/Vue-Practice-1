@@ -4,19 +4,26 @@ const app = Vue.createApp({
       counter: 10,
       name: "",
       confirmedName: "",
-      fullName: "",
+      lastName: "",
+      // fullName: "",
     };
   },
   watch: {
-    name() {
-      this.fullName = this.name + " " + "Szcz";
+    counter(value) {
+      if (value > 50) {
+        this.counter = 0;
+      }
     },
+    //   name(value) {
+    //     if (!value) this.fullName = "";
+    //     else this.fullName = value + " " + "Szcz";
+    //   },
   },
   computed: {
-    // fullName() {
-    //   console.log("Hello");
-    //   if (this.name) return this.name + " " + "Szczes";
-    // },
+    fullName() {
+      console.log("Hello");
+      if (this.name) return this.name + " " + this.lastName;
+    },
   },
   methods: {
     resetInput() {

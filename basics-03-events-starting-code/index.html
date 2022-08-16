@@ -19,10 +19,11 @@
     <section id="events">
       <h2>Events in Action</h2>
       <button v-on:click="add(5)">Add 5</button>
-      <button v-on:click="minus(5)">Reduce 5</button>
+      <button @click="minus(5)">Reduce 5</button>
       <p v-once>Starting Counter: {{ counter }}</p>
       <p>Result: {{ counter }}</p>
       <input type="text" v-model="name" />
+      <input type="text" v-model="lastName" />
       <button v-on:click="resetInput">Reset Input</button>
       <p>Your Name: {{ fullName }}</p>
       <form v-on:submit.prevent="submitForm">
