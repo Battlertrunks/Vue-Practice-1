@@ -1,6 +1,6 @@
 <template>
   <li>
-    <h2>{{ name }} {{ friendIsFav ? "(Favorite)" : "" }}</h2>
+    <h2>{{ name }} {{ isFavorite ? "(Favorite)" : "" }}</h2>
     <button @click="toggleFavorite">Toggle Favorite</button>
     <button @click="toggleDetails">
       {{ detailsAreVisible ? "Hide" : "Show" }} Details
@@ -22,6 +22,10 @@
 export default {
   // props: ["name", "phoneNumber", "emailAddress", "isFavorite"],
   props: {
+    id: {
+      type: String,
+      requried: true,
+    },
     name: {
       type: String,
       requried: true,
@@ -40,10 +44,19 @@ export default {
       default: false,
     },
   },
+  emits: ["toggle-favorite"],
+  // emits: {
+  //   "toggle-favorite": (id) => {
+  //     if (id) return true;
+  //     else {
+  //       console.warn("ID is missing!");
+  //       return false;
+  //     }
+  //   },
+  // },
   data() {
     return {
       detailsAreVisible: false,
-      friendIsFav: this.isFavorite,
     };
   },
   methods: {
@@ -51,7 +64,7 @@ export default {
       this.detailsAreVisible = !this.detailsAreVisible;
     },
     toggleFavorite() {
-      this.friendIsFav = !this.friendIsFav;
+      this.$emit("toggle-favorite", this.id);
     },
   },
 };
