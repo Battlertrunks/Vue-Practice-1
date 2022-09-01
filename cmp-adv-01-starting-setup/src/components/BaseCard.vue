@@ -1,7 +1,9 @@
 <template>
   <section>
-    <header>
-      <slot name="header"></slot>
+    <header v-if="$slots.header">
+      <slot name="header">
+        <!-- <h2>No Active Users</h2> -->
+      </slot>
     </header>
     <slot></slot>
   </section>
@@ -9,7 +11,9 @@
 
 <script>
 export default {
-  props: [""],
+  mounted() {
+    console.log(this.$slots.header);
+  },
 };
 </script>
 
