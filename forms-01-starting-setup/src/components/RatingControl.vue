@@ -1,12 +1,12 @@
 <template>
   <ul>
-    <li v-bind:class="{ active: activeOption === 'poor' }">
+    <li v-bind:class="{ active: modelValue === 'poor' }">
       <button type="button" v-on:click="activate('poor')">Poor</button>
     </li>
-    <li v-bind:class="{ active: activeOption === 'average' }">
+    <li v-bind:class="{ active: modelValue === 'average' }">
       <button type="button" v-on:click="activate('average')">Average</button>
     </li>
-    <li :class="{ active: activeOption === 'great' }">
+    <li :class="{ active: modelValue === 'great' }">
       <button type="button" v-on:click="activate('great')">Great</button>
     </li>
   </ul>
@@ -14,14 +14,22 @@
 
 <script>
 export default {
-  data() {
-    return {
-      activeOption: null,
-    };
-  },
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
+  //   data() {
+  //     return {
+  //       activeOption: null,
+  //     };
+  //   },
+  // computed: {
+  //     activeOption() {
+  //         return this.modelValue;
+  //     }
+  // },
   methods: {
     activate(opt) {
-      this.activeOption = opt;
+      //   this.activeOption = opt;
+      this.$emit('update:modelValue', opt);
     },
   },
 };
