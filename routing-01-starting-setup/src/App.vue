@@ -4,6 +4,9 @@
     <!-- Used to display components with certain routes -->
     <router-view></router-view>
   </main>
+  <footer>
+    <router-view name="footer"></router-view>
+  </footer>
 </template>
 
 <script>

@@ -6,19 +6,27 @@ import TeamsList from './components/teams/TeamsList.vue';
 import UsersList from './components/users/UsersList.vue';
 import TeamMembers from './components/teams/TeamMembers.vue';
 import NotFound from './components/nav/NotFound.vue';
+import TeamsFooter from './components/teams/TeamsFooter.vue';
+import UsersFooter from './components/users/UsersFooter.vue';
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', redirect: '/teams' },
     {
+      name: 'teams',
       path: '/teams',
-      component: TeamsList,
+      components: { default: TeamsList, footer: TeamsFooter },
       children: [
-        { path: ':teamId', component: TeamMembers, props: true }, // props tells the vue router that the dynamic parameters should be passed into this component as props than just $route
+        {
+          name: 'team-members',
+          path: ':teamId',
+          component: TeamMembers,
+          props: true,
+        }, // props tells the vue router that the dynamic parameters should be passed into this component as props than just $route
       ] /*alias: '/'*/,
     }, // our-domain.com/teams => TeamsList
-    { path: '/users', component: UsersList }, // our-domain.com/users => UsersList
+    { path: '/users', components: { default: UsersList, footer: UsersFooter } }, // our-domain.com/users => UsersList
     { path: '/:notFound(.*)', component: NotFound },
   ],
   linkActiveClass: 'active', //Can change the css name for active links
