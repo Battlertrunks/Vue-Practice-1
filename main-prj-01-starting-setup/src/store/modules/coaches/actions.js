@@ -25,7 +25,9 @@ export default {
 
     context.commit('registerCoach', { ...coachData, id: userId });
   },
-  async loadCoaches(context) {
+  async loadCoaches(context, payload) {
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) return; // if a minute has not passed yet.
+
     const response = await fetch(
       `https://vue-http-demo-2ee41-default-rtdb.firebaseio.com/coaches.json`
     );
@@ -51,5 +53,6 @@ export default {
     }
 
     context.commit('setCoaches', coaches);
+    context.commit('setFetchTimestamp');
   },
 };

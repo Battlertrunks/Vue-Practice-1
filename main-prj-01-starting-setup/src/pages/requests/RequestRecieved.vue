@@ -54,9 +54,9 @@ export default {
 
       this.isLoading = false;
     },
-  },
-  handleError() {
-    this.isLoading = null;
+    handleError() {
+      this.isLoading = null;
+    },
   },
 };
 </script>
